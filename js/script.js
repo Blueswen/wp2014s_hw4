@@ -253,4 +253,10 @@ $(function(){
         console.log(response);
     })
   });
+  $("#photo").change(function () {
+    var e = $("#album").val();
+    FB.api(e, function (response) {
+      console.log(response);
+    })
+  });
 })
