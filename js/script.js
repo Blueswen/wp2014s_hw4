@@ -51,17 +51,7 @@ FB.getLoginStatus(function(response) {
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
 	
-	
-
-
-//可以思考這程式要放在init內還是init外?
-
-
-
-
-}; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<init end
-
-//起始畫面
+	//起始畫面
 	var ctx = document.getElementById('canvas').getContext('2d'); //宣告變數找到頁面的canvas標籤的2d內容
 	ctx.font='20px "Arial"'; //設定字體與大小
 	ctx.fillText("Click here to start fill with Facebook Profile Picture", 40, 270); //設定預設的開始畫面
@@ -71,8 +61,6 @@ FB.getLoginStatus(function(response) {
 	img2.src = "img/overlayback.png" //圖像路徑
 	var img3 = new Image();//新增圖像3
 	img3.src = "img/typography.png"//圖像路徑
-	console.log(img2.height);
-	
 	
 
 	//宣告基本變數
@@ -119,15 +107,15 @@ FB.getLoginStatus(function(response) {
 				//canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 				//canvas.height = profileIMG.height;		
 				if($('#target').val()=='photo'){
-					px = canMouseX-60;
-					py = canMouseY-64;
+					px = canMouseX-100;
+					py = canMouseY-100;
 					ctx.drawImage(profileIMG,px,py);//從XY軸0，0值開始畫如profileimg
 					ctx.drawImage(img3,tx,ty); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 					ctx.drawImage(img2,0,0); //劃入img2
 				}
 				else if($('#target').val()=='txt'){
-					tx = canMouseX+199/2;
-					ty = canMouseY+89/2;
+					tx = canMouseX-199/2;
+					ty = canMouseY-89/2;
 					ctx.drawImage(profileIMG,px,py);//從XY軸0，0值開始畫如profileimg
 					ctx.drawImage(img3,tx,ty); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 					ctx.drawImage(img2,0,0); //劃入img2
@@ -135,7 +123,7 @@ FB.getLoginStatus(function(response) {
 				var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 				ctx.fillStyle = "black"; //字體顏色
 				ctx.font='20px "微軟正黑體"'; //字體大小和字形
-				ctx.fillText(inputedText, canMouseX-1/2,canMouseY-30/2); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
+				ctx.fillText(inputedText, tx-1/2,ty-30/2); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
       }
     }
 
@@ -144,6 +132,16 @@ FB.getLoginStatus(function(response) {
     $("#canvas").mousemove(function(e){handleMouseMove(e);});
     $("#canvas").mouseup(function(e){handleMouseUp(e);});
     $("#canvas").mouseout(function(e){handleMouseOut(e);});
+
+
+//可以思考這程式要放在init內還是init外?
+
+
+
+
+}; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<init end
+
+
 
    
 
