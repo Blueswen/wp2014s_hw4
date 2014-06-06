@@ -16,6 +16,20 @@ FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
   	window.authToken = response.authResponse.accessToken;
     window.response = response;
+    FB.api('/me/picture?type=large', function (response) { // normal/large/squere
+      var str = "<h4>This is Your Facebook Profile Picture:</h4>";
+      str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
+      $('#profilePic').append(str);
+    });
+    FB.api("/me/albums", function (response) {
+      for (var i = 0; i < response.data.length; i++) {
+        var id = response.data[i].id;
+        var name = response.data[i].name;
+        var op = '<option id="albumID" value=' + id + ">" + name + "</option>";
+        $("#album").append(op);
+        $("#album").prop("selectedIndex", -1)
+      }
+    });
   }
   else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
@@ -131,13 +145,7 @@ FB.getLoginStatus(function(response) {
     $("#canvas").mousemove(function(e){handleMouseMove(e);});
     $("#canvas").mouseup(function(e){handleMouseUp(e);});
     $("#canvas").mouseout(function(e){handleMouseOut(e);});
-
-
 //可以思考這程式要放在init內還是init外?
-
-
-
-
 }; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<init end
 
 
@@ -158,10 +166,6 @@ FB.getLoginStatus(function(response) {
     js.src = "//connect.facebook.net/en_US/sdk.js"; 
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-
-
-
-
 
 // Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法，基本上這樣就可以不用動了，但思考authToken該怎麼拿到，因為這裡我並沒有把使用者登入的token載入到這函數內，所以它是不會得到token的
 function PostImageToFacebook(authToken) {
@@ -208,8 +212,6 @@ function PostImageToFacebook(authToken) {
     }
 }
 
-
-
 // Convert a data URI to blob把影像載入轉換函數
 function dataURItoBlob(dataURI) {
     var byteString = atob(dataURI.split(',')[1]);
@@ -224,27 +226,32 @@ function dataURItoBlob(dataURI) {
 }
 
 function profile(){
-  FB.api('/me/picture?type=large', function (response) { // normal/large/squere
-    var str = "<h4>This is Your Facebook Profile Picture:</h4>";
-    str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
-    $('#profilePic').append(str);
-  });
   $('#albumSelect').slideUp(function(){
     $('#profilePic').slideDown();
   });
 }
 
 function album(){
-  FB.api("/me/albums", function (response) {
-    for (var i = 0; i < response.data.length; i++) {
-      var id = response.data[i].id;
-      var name = response.data[i].name;
-      var op = '<option id="albumID" value=' + id + ">" + name + "</option>";
-      $("#album").append(op);
-      $("#album").prop("selectedIndex", -1)
-    }
-  })
   $('#profilePic').slideUp(function(){
     $('#albumSelect').slideDown();
   });
 }
+$(function(){
+  $("#album").change(function () {
+    $("#photoContainer").html("");
+    $("#photo").html("");
+    console.log("test");
+    var e = this.options[this.selectedIndex].value;
+    var t = e + "/photos";
+    FB.api(t, function (e) {
+        for (var t = 0; t < e.data.length; t++) {
+            var n = e.data[t].id;
+            var r = e.data[t].name;
+            var i = '<option id="photoID" value=' + n + ">" + r + "</option>";
+            $("#photo").append(i);
+            $("#photo").prop("selectedIndex", -1)
+        }
+    })
+  });
+  console.log('hi');
+})
