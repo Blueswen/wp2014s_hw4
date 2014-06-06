@@ -258,7 +258,7 @@ $(function(){
     FB.api(e, function (response) {
       console.log(response);
       console.log(response.images[response.images.length/2]);
-      $('#picinfo').html('<img crossOrigin='Anonymous' src=' + response.images[response.images.length/2] + '></img>');
+      $('#picinfo').html('<img crossOrigin="Anonymous" src=' + response.images[response.images.length/2] + '></img>');
     })
   });
 })
