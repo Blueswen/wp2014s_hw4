@@ -16,7 +16,9 @@ window.fbAsyncInit = function () {//facebook init
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     //呼叫api把圖片放到#preview IMG tag 內
-    
+    var str = "<h3>This is Your Facebook Profile Picture:</h3>";
+    str = str + "<img src="+ response.data.url +">";
+    $('h2').append();
   }
   else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
@@ -51,8 +53,8 @@ FB.getLoginStatus(function(response) {
 	var ctx = document.getElementById('canvas').getContext('2d'); //宣告變數找到頁面的canvas標籤的2d內容
 	ctx.font='20px "Arial"'; //設定字體與大小
 	ctx.fillText("Click here to start fill with Facebook Profile Picture", 40, 270); //設定預設的開始畫面
-    var img = new Image(); // 新增圖像1
-    img.src = "img/overlay.png"; //圖像路徑（路徑自己設，且自己加入想要的圖層）
+  var img = new Image(); // 新增圖像1
+  img.src = "img/overlay.png"; //圖像路徑（路徑自己設，且自己加入想要的圖層）
 	var img2 = new Image(); //新增圖像2
 	img2.src = "img/overlayback.png" //圖像路徑
 	var img3 = new Image();//新增圖像3
