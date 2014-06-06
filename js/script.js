@@ -260,6 +260,7 @@ $(function(){
   });
   $("#photo").change(function () {
     var photo = $("#photo").val();
+    var num;
     FB.api(photo, function (e) {
       console.log(e);
       var i;
@@ -269,11 +270,13 @@ $(function(){
       }
       FB.api(photo+"/likes?summary=true", function (e) {
         console.log(e);
+        num = (e.data.length==0? 0:e.summary.total_count);
       });
       FB.api(photo+"/comments", function (e) {
         console.log(e);
       });
-      $('#picinfo').html('<p>共' + (e.likes.data.length)? e.likes.data.length:'0' + '人覺得這張照片很讚</p><img id="pic" crossOrigin="Anonymous" src=' + e.images[i].source + '></img>');
+
+      $('#picinfo').html('<p>共' + num + '人覺得這張照片很讚</p><img id="pic" crossOrigin="Anonymous" src=' + e.images[i].source + '></img>');
     });
   });
 })
