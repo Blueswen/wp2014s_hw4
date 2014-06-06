@@ -2,9 +2,6 @@
 /*
 這檔案協助你編寫JS，請注意每個code block的使用，若你對自己的javascript很有信心，或是你認為我寫的方式有bug，歡迎自行修改編排
 */
-
-var authToken;
-
 window.fbAsyncInit = function () {//facebook init
     
 //輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
@@ -18,6 +15,7 @@ window.fbAsyncInit = function () {//facebook init
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
   	window.authToken = response.authResponse.accessToken;
+    window.response = response;
     //呼叫api把圖片放到#preview IMG tag 內
   	FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
 			var str = "<h4>This is Your Facebook Profile Picture:</h4>";
@@ -32,6 +30,7 @@ FB.getLoginStatus(function(response) {
           // FB.api('/me/feed', 'post', {message: 'I\'m started using FB API'});
           if (response.authResponse) { // if user login to your apps right after handle an event
           	window.authToken = response.authResponse.accessToken;
+            window.response = response;
           	window.location.reload();
           };
       }, {
@@ -198,8 +197,8 @@ function PostImageToFacebook(authToken) {
                   $(".info").html(
                     "<p>Posted Canvas Successfully.</p>"+
                     "<p><a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a></p>"+
-                    "<p><a href='http://www.facebook.com/" + data.id + "&makeuserprofile=1 '>Set as Profile Picture</a></p>"+
-                    "<p><a href='http://www.facebook.com/" + data.id + "?preview_cover '>Set as Cover Picture</a></p>"
+                    "<p><a href='http://www.facebook.com/photo.php?fbid=" + data.id + "&makeuserprofile=1 '>Set as Profile Picture</a></p>"+
+                    "<p><a href='http://www.facebook.com/" + window.response.id + "?preview_cover=" + data.id + "'>Set as Cover Picture</a></p>"
                   ); //成功訊息並顯示連接
             },
             error: function (shr, status, data) {
