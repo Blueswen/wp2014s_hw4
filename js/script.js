@@ -16,22 +16,11 @@ window.fbAsyncInit = function () {//facebook init
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     //呼叫api把圖片放到#preview IMG tag 內
-    FB.api('/me', function (response) {
-			console.log(response);
-			$('#fbid').append(response.id);
-			$('#fname').append(response.first_name);
-			$('#lname').append(response.last_name);
-			$('#username').append(response.username);
-			$('body').append(response);
-			console.log('My links is' + response.link);
-			console.log('My Username is' + response.username);
-			console.log('My ID is' + response.id);
-		});
   	FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
   		console.log(response.data.url);
 			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
-	    str = str + "<img src="+ response.data.url +">";
-	    $('body').append(str);
+	    str = str + "<img id='preview1' src="+ response.data.url +">";
+	    $('h2').append(str);
 		});
   }
   else if (response.status === 'not_authorized') {
