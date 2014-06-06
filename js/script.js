@@ -16,10 +16,11 @@ window.fbAsyncInit = function () {//facebook init
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     //呼叫api把圖片放到#preview IMG tag 內
-    console.log(response.data);
-    var str = "<h3>This is Your Facebook Profile Picture:</h3>";
-    str = str + "<img src="+ response.data.url +">";
-    $('h2').append();
+  	FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
+			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
+	    str = str + "<img src="+ response.data.url +">";
+	    $('h2').append();
+		});
   }
   else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
