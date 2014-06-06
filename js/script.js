@@ -16,8 +16,7 @@ window.fbAsyncInit = function () {//facebook init
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     //呼叫api把圖片放到#preview IMG tag 內
-  	FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
-  		console.log(response.data.url);
+  	FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
 			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
 	    str = str + "<img id='preview1' src="+ response.data.url +">";
 	    $('h2').append(str);
