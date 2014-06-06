@@ -260,7 +260,7 @@ $(function(){
   });
   $("#photo").change(function () {
     var photo = $("#photo").val();
-    FB.api(e, function (e) {
+    FB.api(photo, function (e) {
       console.log(e);
       var i;
       for(i = 0 ; i < e.images.length ; i++){
