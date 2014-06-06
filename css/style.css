@@ -42,6 +42,10 @@ body {
     line-height: 13px;
 }
 
+canvas{
+    margin-top: 10px;
+}
+
 label{
     display: block;
     text-align: center;
@@ -53,7 +57,8 @@ label{
 
 .fb-like{
     float: right;
-    width: 250px;
+    width: 225px;
+    height: 20px;
 }
 
 h4{
