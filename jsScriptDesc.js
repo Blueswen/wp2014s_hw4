@@ -6,48 +6,19 @@ window.fbAsyncInit = function () {//facebook init
     
 //輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
 
- FB.init({
-      appId: '674128315993856', 
-      xfbml: true,
-      version: 'v2.0'
- });
 
 
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     //呼叫api把圖片放到#preview IMG tag 內
-    FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
-      var str = "<h3>This is Your Facebook Profile Picture:</h3>";
-      str = str + "<img id='preview1' src="+ response.data.url +">";
-      $('h2').after(str);
-    });
-  }
-  else if (response.status === 'not_authorized') {
+    
+  } else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
-    console.log("this user is not authorizied your apps");
-    FB.login(function (response) {
-          // FB.api('/me/feed', 'post', {message: 'I\'m started using FB API'});
-          if (response.authResponse) { // if user login to your apps right after handle an event
-            window.authToken = e.authResponse.accessToken;
-            window.location.reload();
-          };
-      }, {
-          scope: 'user_photos,publish_actions'
-      });
-  }
-  else {
+	
+  } else {
     //同樣要求使用者登入
-    console.log("this isn't logged in to Facebook.");
-    FB.login(function (response) {
-      if (response.authResponse) {
-        window.location.reload();
-      }
-      else {
-        //alertify.alert('An Error has Occurs,Please Reload your Pages');
-      }
-    });
   }
-});
+ });
 
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可

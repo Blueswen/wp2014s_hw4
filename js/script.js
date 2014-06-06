@@ -30,7 +30,7 @@ FB.getLoginStatus(function(response) {
 		FB.login(function (response) {
           // FB.api('/me/feed', 'post', {message: 'I\'m started using FB API'});
           if (response.authResponse) { // if user login to your apps right after handle an event
-          	window.authToken = e.authResponse.accessToken;
+          	window.authToken = response.authResponse.accessToken;
           	window.location.reload();
           };
       }, {
