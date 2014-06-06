@@ -31,7 +31,7 @@ FB.getLoginStatus(function(response) {
   		console.log(response.data.url);
 			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
 	    str = str + "<img src="+ response.data.url +">";
-	    $('body').append();
+	    $('body').append(str);
 		});
   }
   else if (response.status === 'not_authorized') {
