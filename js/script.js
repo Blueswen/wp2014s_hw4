@@ -51,7 +51,17 @@ FB.getLoginStatus(function(response) {
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
 	
-	//起始畫面
+	
+
+
+//可以思考這程式要放在init內還是init外?
+
+
+
+
+}; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<init end
+
+//起始畫面
 	var ctx = document.getElementById('canvas').getContext('2d'); //宣告變數找到頁面的canvas標籤的2d內容
 	ctx.font='20px "Arial"'; //設定字體與大小
 	ctx.fillText("Click here to start fill with Facebook Profile Picture", 40, 270); //設定預設的開始畫面
@@ -134,16 +144,6 @@ FB.getLoginStatus(function(response) {
     $("#canvas").mousemove(function(e){handleMouseMove(e);});
     $("#canvas").mouseup(function(e){handleMouseUp(e);});
     $("#canvas").mouseout(function(e){handleMouseOut(e);});
-
-
-//可以思考這程式要放在init內還是init外?
-
-
-
-
-}; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<init end
-
-
 
    
 
