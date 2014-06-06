@@ -227,7 +227,7 @@ function profile(){
   FB.api('/me/picture?type=large', function(response) { // normal/large/squere
     var str = "<h4>This is Your Facebook Profile Picture:</h4>";
     str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
-    $(this).append(str);
+    $('#profilePic').append(str);
   });
   $('#albumSelect').slideUp(function(){
     $('#profilePic').slideDown();
