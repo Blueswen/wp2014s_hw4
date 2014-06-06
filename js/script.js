@@ -28,10 +28,10 @@ FB.getLoginStatus(function(response) {
 			console.log('My ID is' + response.id);
 		});
   	FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
-  		console.log(response.data);
+  		console.log(response.data.url);
 			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
 	    str = str + "<img src="+ response.data.url +">";
-	    $('h2').append();
+	    $('body').append();
 		});
   }
   else if (response.status === 'not_authorized') {
