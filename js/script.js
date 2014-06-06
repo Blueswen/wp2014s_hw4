@@ -20,9 +20,9 @@ FB.getLoginStatus(function(response) {
   	window.authToken = response.authResponse.accessToken;
     //呼叫api把圖片放到#preview IMG tag 內
   	FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
-			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
+			var str = "<h4>This is Your Facebook Profile Picture:</h4>";
 	    str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
-	    $('h2').after(str);
+	    $('#fb-like').after(str);
 		});
   }
   else if (response.status === 'not_authorized') {
@@ -108,7 +108,8 @@ FB.getLoginStatus(function(response) {
       if(isDragging){ //當拖拉為True時
       	ctx.clearRect(0,0,canvasWidth,canvasHeight); //移除canvas起始的內容
 				var profileIMG = document.getElementById("preview1");//抓html裡預載入的照片
-				profileIMG.crossOrigin = "Anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
+				//profileIMG.crossOrigin = "Anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
+				//Anonymous要設在 img tag 裡面才有用
 				//canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 				//canvas.height = profileIMG.height;		
 				if($('#target').val()=='photo'){
@@ -187,6 +188,84 @@ function PostImageToFacebook(authToken) {
     try {
         $.ajax({
             url: "https://graph.facebook.com/me/photos?access_token=" + authToken,//GraphAPI Call
+            type: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                console.log("success " + data);//成功log + photoID
+                  $(".info").html("Posted Canvas Successfully. [<a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a>] "); //成功訊息並顯示連接
+            },
+            error: function (shr, status, data) {
+                $(".info").html("error " + data + " Status " + shr.status);//如果錯誤把訊息傳到class info內
+            },
+            complete: function () {
+                $(".info").append("Posted to facebook");//完成後把訊息傳到HTML的div內
+            }
+        });
+
+    } catch (e) {
+        console.log(e);//錯誤訊息的log
+    }
+}
+
+function SetProfilePhoto(authToken) {
+  $('.info').append('<img src="img/loading.gif"/>')//載入loading的img
+    authToken = window.authToken;
+    var canvas = document.getElementById("canvas");//找canvas
+    var imageData = canvas.toDataURL("image/png");//把canvas轉換PNG
+    try {
+        blob = dataURItoBlob(imageData);//把影像載入轉換函數
+    } catch (e) {
+        console.log(e);//錯誤訊息的log
+    }
+    var fd = new FormData();
+    fd.append("access_token", authToken);//請思考accesstoken要怎麼傳到這function內
+    fd.append("source", blob);//輸入的照片
+    fd.append("message", $('#text').val());//輸入的訊息
+    try {
+        $.ajax({
+            url: "https://graph.facebook.com/me/photos?access_token=" + authToken + "&makeuserprofile=1",//GraphAPI Call
+            type: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                console.log("success " + data);//成功log + photoID
+                  $(".info").html("Posted Canvas Successfully. [<a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a>] "); //成功訊息並顯示連接
+            },
+            error: function (shr, status, data) {
+                $(".info").html("error " + data + " Status " + shr.status);//如果錯誤把訊息傳到class info內
+            },
+            complete: function () {
+                $(".info").append("Posted to facebook");//完成後把訊息傳到HTML的div內
+            }
+        });
+
+    } catch (e) {
+        console.log(e);//錯誤訊息的log
+    }
+}
+
+function SetCoverPicture  (authToken) {
+  $('.info').append('<img src="img/loading.gif"/>')//載入loading的img
+    authToken = window.authToken;
+    var canvas = document.getElementById("canvas");//找canvas
+    var imageData = canvas.toDataURL("image/png");//把canvas轉換PNG
+    try {
+        blob = dataURItoBlob(imageData);//把影像載入轉換函數
+    } catch (e) {
+        console.log(e);//錯誤訊息的log
+    }
+    var fd = new FormData();
+    fd.append("access_token", authToken);//請思考accesstoken要怎麼傳到這function內
+    fd.append("source", blob);//輸入的照片
+    fd.append("message", $('#text').val());//輸入的訊息
+    try {
+        $.ajax({
+            url: "https://graph.facebook.com/me/photos?access_token=" + authToken + "?preview_cover",//GraphAPI Call
             type: "POST",
             data: fd,
             processData: false,

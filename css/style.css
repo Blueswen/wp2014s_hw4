@@ -9,11 +9,11 @@ body {
 }
 
 #main {
-    width: 550px;
+    width: 620px;
     margin: auto;
     text-align: left;
     background: white;
-    padding: 50px 60px;
+    padding: 40px 40px 10px;
     border: solid #ddd;
     border-width: 0 1px 1px 1px;
 }
@@ -42,7 +42,18 @@ body {
     line-height: 13px;
 }
 
+label{
+    display: block;
+    text-align: center;
+}
 
+.other{
+    margin:10px;
+}
+
+.fb-like{
+    float: right;
+}
 
 /*
 Colorbox Core Style:
