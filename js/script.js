@@ -3,6 +3,8 @@
 這檔案協助你編寫JS，請注意每個code block的使用，若你對自己的javascript很有信心，或是你認為我寫的方式有bug，歡迎自行修改編排
 */
 
+var authToken;
+
 window.fbAsyncInit = function () {//facebook init
     
 //輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
@@ -28,6 +30,7 @@ FB.getLoginStatus(function(response) {
 		FB.login(function (response) {
           // FB.api('/me/feed', 'post', {message: 'I\'m started using FB API'});
           if (response.authResponse) { // if user login to your apps right after handle an event
+          	window.authToken = e.authResponse.accessToken;
           	window.location.reload();
           };
       }, {
@@ -123,7 +126,7 @@ FB.getLoginStatus(function(response) {
 				var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 				ctx.fillStyle = "black"; //字體顏色
 				ctx.font='20px "微軟正黑體"'; //字體大小和字形
-				ctx.fillText(inputedText, tx+150,ty+120); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
+				ctx.fillText(inputedText, tx+100,ty+50); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
       }
     }
 
