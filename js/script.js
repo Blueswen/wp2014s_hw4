@@ -236,22 +236,21 @@ function album(){
     $('#albumSelect').slideDown();
   });
 }
+
 $(function(){
   $("#album").change(function () {
-    $("#photoContainer").html("");
     $("#photo").html("");
-    console.log("test");
     var e = this.options[this.selectedIndex].value;
     var t = e + "/photos";
-    FB.api(t, function (e) {
-        for (var t = 0; t < e.data.length; t++) {
-            var n = e.data[t].id;
-            var r = e.data[t].name;
-            var i = '<option id="photoID" value=' + n + ">" + r + "</option>";
-            $("#photo").append(i);
+    FB.api(t, function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+            var id = response.data[i].id;
+            var name = response.data[i].name;
+            var op = '<option id="photoID" value=' + id + ">" + name + "</option>";
+            $("#photo").append(op);
             $("#photo").prop("selectedIndex", -1)
         }
+        console.log(response);
     })
   });
-  console.log('hi');
 })
