@@ -53,6 +53,11 @@ label{
 
 .fb-like{
     float: right;
+    width: 300px;
+}
+
+h3{
+    clear:both;
 }
 
 /*
