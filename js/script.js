@@ -107,15 +107,15 @@ FB.getLoginStatus(function(response) {
 				//canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 				//canvas.height = profileIMG.height;		
 				if($('#target').val()=='photo'){
-					px = canMouseX;
-					py = canMouseY+profileIMG.height;
+					px = canMouseX+profileIMG.height;
+					py = canMouseY;
 					ctx.drawImage(profileIMG,px,py);//從XY軸0，0值開始畫如profileimg
 					ctx.drawImage(img3,tx,ty); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 					ctx.drawImage(img2,0,0); //劃入img2
 				}
 				else if($('#target').val()=='txt'){
 					tx = canMouseX;
-					ty = canMouseY+89/2;
+					ty = canMouseY;
 					ctx.drawImage(profileIMG,px,py);//從XY軸0，0值開始畫如profileimg
 					ctx.drawImage(img3,tx,ty); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 					ctx.drawImage(img2,0,0); //劃入img2
