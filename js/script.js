@@ -105,6 +105,9 @@ FB.getLoginStatus(function(response) {
       canMouseY=parseInt(e.clientY-offsetY);
       // if doesn't start darw image to default position
       if(!isStart){
+      	ctx.clearRect(0,0,canvasWidth,canvasHeight); //移除canvas起始的內容
+				var profileIMG = document.getElementById("preview1");//抓html裡預載入的照片
+				profileIMG.crossOrigin = "Anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
       	ctx.drawImage(profileIMG,px,py);//從XY軸0，0值開始畫如profileimg
 				ctx.drawImage(img3,tx,ty); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 				ctx.drawImage(img2,0,0); //劃入img2
