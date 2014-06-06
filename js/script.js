@@ -267,13 +267,13 @@ $(function(){
         if(e.images[i].width<500 && e.images[i].height<420)
           break;
       }
-      FB.api(photo+"/likes", function (e) {
+      FB.api(photo+"/likes?summary=true", function (e) {
         console.log(e);
       });
       FB.api(photo+"/comments", function (e) {
         console.log(e);
       });
-      $('#picinfo').html('<p>共' + e.likes.data.length + '人覺得這張照片很讚</p><img id="pic" crossOrigin="Anonymous" src=' + e.images[i].source + '></img>');
+      $('#picinfo').html('<p>共' + (e.likes.data.length)? e.likes.data.length:'0' + '人覺得這張照片很讚</p><img id="pic" crossOrigin="Anonymous" src=' + e.images[i].source + '></img>');
     });
   });
 })
