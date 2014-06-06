@@ -107,7 +107,7 @@ FB.getLoginStatus(function(response) {
 				//canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 				//canvas.height = profileIMG.height;		
 				if($('#target').val()=='photo'){
-					px = canMouseX+profileIMG.height;
+					px = canMouseX;
 					py = canMouseY;
 					ctx.drawImage(profileIMG,px,py);//從XY軸0，0值開始畫如profileimg
 					ctx.drawImage(img3,tx,ty); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
@@ -123,7 +123,7 @@ FB.getLoginStatus(function(response) {
 				var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 				ctx.fillStyle = "black"; //字體顏色
 				ctx.font='20px "微軟正黑體"'; //字體大小和字形
-				ctx.fillText(inputedText, tx,ty); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
+				ctx.fillText(inputedText, tx+50,ty+20); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
       }
     }
 
