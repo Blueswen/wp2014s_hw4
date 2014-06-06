@@ -18,7 +18,6 @@ window.fbAsyncInit = function () {//facebook init
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
   	window.authToken = response.authResponse.accessToken;
-  	window.location.reload();
     //呼叫api把圖片放到#preview IMG tag 內
   	FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
 			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
