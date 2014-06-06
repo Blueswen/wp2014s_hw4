@@ -22,7 +22,7 @@ FB.getLoginStatus(function(response) {
   	FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
 			var str = "<h4>This is Your Facebook Profile Picture:</h4>";
 	    str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
-	    $('#fb-like').after(str);
+	    $('h3').after(str);
 		});
   }
   else if (response.status === 'not_authorized') {
