@@ -27,6 +27,21 @@
 <body>
     <section id="main">
         <h3>This is a HTML5 Canvas Pages with Facebook</h3>
+        <div id="picture">
+            <button type="button" class="btn btn-warning" onclick="profile()">Profile Picture</button>
+            <button type="button" class="btn btn-danger" onclick="album()">Album Picture</button>
+            <div id="albumSelect" class="picselect" style="display:none">
+                <label>Album:
+                <select id="album"></select>
+                </label>
+                <label>Photos:
+                <select id="photo"></select>
+                </label>
+            </div>
+            <div id="profilePic" class="picselect" style="display:none">
+                hihi
+            </div>
+        </div>
         <canvas width="540" height="540" crossorigin="anonymous" id="canvas"></canvas>
         <label>選擇要移動的圖層
             <select id="target">

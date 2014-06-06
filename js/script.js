@@ -16,12 +16,6 @@ FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
   	window.authToken = response.authResponse.accessToken;
     window.response = response;
-    //呼叫api把圖片放到#preview IMG tag 內
-  	FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
-			var str = "<h4>This is Your Facebook Profile Picture:</h4>";
-	    str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
-	    $('h3').after(str);
-		});
   }
   else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
@@ -229,6 +223,21 @@ function dataURItoBlob(dataURI) {
     });
 }
 
+function profile(){
+  FB.api('/me/picture?type=large', function(response) { // normal/large/squere
+    response = window.response;
+    var str = "<h4>This is Your Facebook Profile Picture:</h4>";
+    str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
+    $(this).append(str);
+  });
+  $('#albumSelect').slideUp(function(){
+    $('#profilePic').slideDown();
+  });
+}
 
+function album(){
 
-
+  $('#profilePic').slideUp(function(){
+    $('#albumSelect').slideDown();
+  });
+}
