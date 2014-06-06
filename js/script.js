@@ -195,12 +195,12 @@ function PostImageToFacebook(authToken) {
             cache: false,
             success: function (data) {
                 console.log("success " + data);//成功log + photoID
-                  $(".info").html("
-                    <p>Posted Canvas Successfully.</p>
-                    <p><a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a></p>
-                    <p><a href='http://www.facebook.com/" + data.id + "&makeuserprofile=1 '>Set as Profile Picture</a></p>
-                    <p><a href='http://www.facebook.com/" + data.id + "?preview_cover '>Set as Cover Picture</a></p>
-                  "); //成功訊息並顯示連接
+                  $(".info").html(
+                    "<p>Posted Canvas Successfully.</p>"+
+                    "<p><a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a></p>"+
+                    "<p><a href='http://www.facebook.com/" + data.id + "&makeuserprofile=1 '>Set as Profile Picture</a></p>"+
+                    "<p><a href='http://www.facebook.com/" + data.id + "?preview_cover '>Set as Cover Picture</a></p>"
+                  ); //成功訊息並顯示連接
             },
             error: function (shr, status, data) {
                 $(".info").html("error " + data + " Status " + shr.status);//如果錯誤把訊息傳到class info內
