@@ -270,7 +270,7 @@ $(function(){
       }
       FB.api(photo+"/likes?summary=true", function (e) {
         console.log(e);
-        num = (e.data.length==0? 0:e.summary.total_count);
+        num = e.summary.total_count;
       });
       FB.api(photo+"/comments", function (e) {
         console.log(e);
