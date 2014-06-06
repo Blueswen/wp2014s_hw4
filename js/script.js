@@ -257,6 +257,7 @@ $(function(){
     var e = $("#photo").val();
     FB.api(e, function (response) {
       console.log(response);
+      $('#picinfo').html('<img src=' + response.images[response.images.length/2] + '></img>');
     })
   });
 })
