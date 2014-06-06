@@ -51,6 +51,7 @@ body {
     margin-top: 10px;
     border: solid 1px grey;
     border-radius: 5px;
+    padding: 10px;
 }
 
 canvas{

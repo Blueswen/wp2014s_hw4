@@ -224,7 +224,7 @@ function dataURItoBlob(dataURI) {
 }
 
 function profile(){
-  FB.api('/me/picture?type=large', function(response) { // normal/large/squere
+  FB.api('/me/picture?type=large', function (response) { // normal/large/squere
     var str = "<h4>This is Your Facebook Profile Picture:</h4>";
     str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
     $('#profilePic').append(str);
@@ -235,7 +235,15 @@ function profile(){
 }
 
 function album(){
-
+  FB.api("/me/albums", function (response) {
+    for (var i = 0; i < response.data.length; i++) {
+      var id = response.data[i].id;
+      var name = response.data[i].name;
+      var op = '<option id="albumID" value=' + id + ">" + name + "</option>";
+      $("#album").append(op);
+      $("#album").prop("selectedIndex", -1)
+    }
+  })
   $('#profilePic').slideUp(function(){
     $('#albumSelect').slideDown();
   });
