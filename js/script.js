@@ -197,8 +197,8 @@ function PostImageToFacebook(authToken) {
                   $(".info").html(
                     "<p>Posted Canvas Successfully.</p>"+
                     "<p><a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a></p>"+
-                    "<p><a href='http://www.facebook.com/photo.php?fbid=" + data.id + "&makeuserprofile=1 '>Set as Profile Picture</a></p>"+
-                    "<p><a href='http://www.facebook.com/" + window.response.id + "?preview_cover=" + data.id + "'>Set as Cover Picture</a></p>"
+                    "<p><a href='http://www.facebook.com/photo.php?fbid=" + data.id + "&makeprofile=1 '>Set as Profile Picture</a></p>"+
+                    "<p><a href='http://www.facebook.com/" + window.response.authResponse.userID + "?preview_cover=" + data.id + "'>Set as Cover Picture</a></p>"
                   ); //成功訊息並顯示連接
             },
             error: function (shr, status, data) {
