@@ -21,7 +21,7 @@ FB.getLoginStatus(function(response) {
     //呼叫api把圖片放到#preview IMG tag 內
   	FB.api('/me/picture?type=large', function(response) { // normal/large/squere 
 			var str = "<h3>This is Your Facebook Profile Picture:</h3>";
-	    str = str + "<img id='preview1' src="+ response.data.url +">";
+	    str = str + "<img id='preview1' crossOrigin='Anonymous' src="+ response.data.url +">";
 	    $('h2').after(str);
 		});
   }
