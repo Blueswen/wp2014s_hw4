@@ -254,7 +254,7 @@ $(function(){
     })
   });
   $("#photo").change(function () {
-    var e = $("#album").val();
+    var e = $("#photo").val();
     FB.api(e, function (response) {
       console.log(response);
     })
