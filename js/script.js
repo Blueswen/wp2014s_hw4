@@ -257,7 +257,12 @@ $(function(){
     var e = $("#photo").val();
     FB.api(e, function (e) {
       console.log(e);
-      $('#picinfo').html('<img crossOrigin="Anonymous" src=' + e.images[Math.round(e.images.length/2)].source + '></img>');
+      var i;
+      for(i = 0 ; i < e.images.length ; i++){
+        if(e.images[i].width<500)
+          break;
+      }
+      $('#picinfo').html('<img crossOrigin="Anonymous" src=' + e.images[i].source + '></img>');
     })
   });
 })
