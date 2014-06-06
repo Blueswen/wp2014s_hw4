@@ -1,4 +1,3 @@
-// JavaScript Document
 /*
 這檔案協助你編寫JS，請注意每個code block的使用，若你對自己的javascript很有信心，或是你認為我寫的方式有bug，歡迎自行修改編排
 */
@@ -6,41 +5,18 @@
 window.fbAsyncInit = function () {//facebook init
     
 //輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
- FB.init({
-      appId: '674128315993856', 
-      xfbml: true,
-      version: 'v2.0'
-  });
+
 
 
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     //呼叫api把圖片放到#preview IMG tag 內
     
-  }
-  else if (response.status === 'not_authorized') {
+  } else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
-		console.log("this user is not authorizied your apps");
-		FB.login(function (response) {
-          // FB.api('/me/feed', 'post', {message: 'I\'m started using FB API'});
-          if (response.authResponse) { // if user login to your apps right after handle an event
-          	window.location.reload();
-          };
-      }, {
-          scope: 'user_photos,publish_actions'
-      });
-  }
-  else {
+	
+  } else {
     //同樣要求使用者登入
-    console.log("this isn't logged in to Facebook.");
-		FB.login(function (response) {
-			if (response.authResponse) {
-				window.location.reload();
-			}
-			else {
-        //alertify.alert('An Error has Occurs,Please Reload your Pages');
-      }
-    });
   }
  });
 
