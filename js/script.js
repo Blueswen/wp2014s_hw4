@@ -195,13 +195,18 @@ function PostImageToFacebook(authToken) {
             cache: false,
             success: function (data) {
                 console.log("success " + data);//成功log + photoID
-                  $(".info").html("Posted Canvas Successfully. [<a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a>] "); //成功訊息並顯示連接
+                  $(".info").html("
+                    <p>Posted Canvas Successfully.</p>
+                    <p><a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a></p>
+                    <p><a href='http://www.facebook.com/" + data.id + "&makeuserprofile=1 '>Set as Profile Picture</a></p>
+                    <p><a href='http://www.facebook.com/" + data.id + "?preview_cover '>Set as Cover Picture</a></p>
+                  "); //成功訊息並顯示連接
             },
             error: function (shr, status, data) {
                 $(".info").html("error " + data + " Status " + shr.status);//如果錯誤把訊息傳到class info內
             },
             complete: function () {
-                $(".info").append("Posted to facebook");//完成後把訊息傳到HTML的div內
+                $(".info").append("<p>Posted to facebook</p>");//完成後把訊息傳到HTML的div內
             }
         });
 
@@ -209,85 +214,6 @@ function PostImageToFacebook(authToken) {
         console.log(e);//錯誤訊息的log
     }
 }
-
-function SetProfilePhoto(authToken) {
-  $('.info').append('<img src="img/loading.gif"/>')//載入loading的img
-    authToken = window.authToken;
-    var canvas = document.getElementById("canvas");//找canvas
-    var imageData = canvas.toDataURL("image/png");//把canvas轉換PNG
-    try {
-        blob = dataURItoBlob(imageData);//把影像載入轉換函數
-    } catch (e) {
-        console.log(e);//錯誤訊息的log
-    }
-    var fd = new FormData();
-    fd.append("access_token", authToken);//請思考accesstoken要怎麼傳到這function內
-    fd.append("source", blob);//輸入的照片
-    fd.append("message", $('#text').val());//輸入的訊息
-    try {
-        $.ajax({
-            url: "https://graph.facebook.com/me/photos?access_token=" + authToken + "&makeuserprofile=1",//GraphAPI Call
-            type: "POST",
-            data: fd,
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (data) {
-                console.log("success " + data);//成功log + photoID
-                  $(".info").html("Posted Canvas Successfully. [<a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a>] "); //成功訊息並顯示連接
-            },
-            error: function (shr, status, data) {
-                $(".info").html("error " + data + " Status " + shr.status);//如果錯誤把訊息傳到class info內
-            },
-            complete: function () {
-                $(".info").append("Posted to facebook");//完成後把訊息傳到HTML的div內
-            }
-        });
-
-    } catch (e) {
-        console.log(e);//錯誤訊息的log
-    }
-}
-
-function SetCoverPicture  (authToken) {
-  $('.info').append('<img src="img/loading.gif"/>')//載入loading的img
-    authToken = window.authToken;
-    var canvas = document.getElementById("canvas");//找canvas
-    var imageData = canvas.toDataURL("image/png");//把canvas轉換PNG
-    try {
-        blob = dataURItoBlob(imageData);//把影像載入轉換函數
-    } catch (e) {
-        console.log(e);//錯誤訊息的log
-    }
-    var fd = new FormData();
-    fd.append("access_token", authToken);//請思考accesstoken要怎麼傳到這function內
-    fd.append("source", blob);//輸入的照片
-    fd.append("message", $('#text').val());//輸入的訊息
-    try {
-        $.ajax({
-            url: "https://graph.facebook.com/me/photos?access_token=" + authToken + "?preview_cover",//GraphAPI Call
-            type: "POST",
-            data: fd,
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (data) {
-                console.log("success " + data);//成功log + photoID
-                  $(".info").html("Posted Canvas Successfully. [<a href='http://www.facebook.com/" + data.id + " '>Go to Profile Picture</a>] "); //成功訊息並顯示連接
-            },
-            error: function (shr, status, data) {
-                $(".info").html("error " + data + " Status " + shr.status);//如果錯誤把訊息傳到class info內
-            },
-            complete: function () {
-                $(".info").append("Posted to facebook");//完成後把訊息傳到HTML的div內
-            }
-        });
-
-    } catch (e) {
-        console.log(e);//錯誤訊息的log
-    }
-}
-
 
 
 
