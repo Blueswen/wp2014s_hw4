@@ -255,10 +255,9 @@ $(function(){
   });
   $("#photo").change(function () {
     var e = $("#photo").val();
-    FB.api(e, function (response) {
-      console.log(response);
-      console.log(response.images[response.images.length/2]);
-      $('#picinfo').html('<img crossOrigin="Anonymous" src=' + response.images[response.images.length/2] + '></img>');
+    FB.api(e, function (e) {
+      console.log(e);
+      $('#picinfo').html('<img crossOrigin="Anonymous" src=' + e.images[Math.round(e.images.length/2)].source + '></img>');
     })
   });
 })
