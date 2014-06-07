@@ -3,14 +3,23 @@
 
 <head>
     <meta charset="utf-8">
-
+    <meta property="og:title" content="Web Hw4" >
+    <meta property="og:type" content="website" >
+    <meta property="og:url" content="http://blueswen.github.io/wp2014s_hw4/" >
+    <meta property="og:image" content="https://www.facebook.com/images/fb_icon_325x325.png" >
+    <meta property="og:description" content="I love Web Progamming <3" >
     <title>HTML5 Canvas & facebook</title>
     <meta name="description" content=" ">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="https://fbstatic-a.akamaihd.net/rsrc.php/yl/r/H3nktOa7ZMg.ico" />
+    
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 	<style>
     #canvas {border: 3px solid grey;}
     </style>
@@ -18,21 +27,61 @@
 
 <body>
     <section id="main">
-        <h2>This is a HTML5 Canvas Pages with Facebook</h2>
-        <canvas width="540" height="540" id="canvas"></canvas>
-    </section>
-    <div class="inputtext" style="width:600px; margin:0 auto;">
-        <label for="inputed">輸入客製化文字：
-            <textarea name="inputed" maxlength="6" id="inputed" placeholder="限輸6字"></textarea><!-- 提供使用者輸入文字欄-->
+        <h3>This is a HTML5 Canvas Pages with Facebook</h3>
+        <div id="picture">
+            <button type="button" class="btn btn-warning" onclick="profile()">Profile Picture</button>
+            <button type="button" class="btn btn-danger" onclick="album()">Album Picture</button>
+            <div id="albumSelect" class="picselect" style="display:none">
+                <label>Album:
+                <select id="album"></select>
+                </label>
+                <label>Photos:
+                <select id="photo"></select>
+                </label>
+                <div id="picinfo"></div>
+            </div>
+            <div id="profilePic" class="picselect" style="display:none"></div>
+        </div>
+        <canvas width="540" height="540" crossorigin="anonymous" id="canvas"></canvas>
+        <label>選擇要移動的圖層
+            <select id="target">
+                <option value="photo">照片</option>
+                <option value="txt">文字</option>
+            </select>
         </label>
-        <br>
-        <button id="sentimg" onClick="PostImageToFacebook()">Post to Facebook</button><!-- 傳送按鈕-->
+        <label for="inputed">輸入客製化文字：
+            <input name="inputed" maxlength="6" id="inputed" placeholder="限輸6字"></input><!-- 提供使用者輸入文字欄-->
+        </label>
+        <label for="inputed">想說的話：
+            <textarea name="text" id="text" style="width:220px"></textarea><!-- message-->
+        </label>
+        <div class="fb-like" id="fb-like" data-href="http://blueswen.github.io/wp2014s_hw4/" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
+    </section>
+    <div class="other">
+        <button type="button" class="btn btn-success" id="sentimg" onClick="PostImageToFacebook()">Post to Facebook</button><!-- 傳送按鈕-->
+        <div class="info"></div><!-- 訊息欄位-->
     </div>
-    <div class="info"></div><!-- 訊息欄位-->
-
+    <div class="fb-comments" data-href="http://blueswen.github.io/wp2014s_hw4/" data-numposts="5" data-colorscheme="light"></div>
     
 
     <script type="text/javascript" src="js/script.js"></script>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=674128315993856&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=674128315993856&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 
 </html>
